@@ -1,4 +1,4 @@
 export default {
   apiKey: "",
-  backendURL: "",
+ backendURL: import.meta.env.VITE_API_BASE_URL,
 };
