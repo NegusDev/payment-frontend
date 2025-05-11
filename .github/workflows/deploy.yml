@@ -29,6 +29,10 @@ jobs:
         echo "VITE_API_BASE_URL=${{ secrets.VITE_API_BASE_URL }}" >> .env
         echo "VITE_APP_ENV=production" >> .env
 
+    - name: See files
+      run : |
+        cat .env
+
     - name: Build Project
       run: npm run build
 
@@ -41,6 +45,6 @@ jobs:
         local-dir: dist/
         server-dir: ${{ secrets.DIRECTORY }}
         exclude: |
-          **/.git*
-          **/.github*
+          **/.git**/*
+          **/.github**/*
         dangerous-clean-slate: true
