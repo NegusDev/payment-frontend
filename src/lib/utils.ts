@@ -10,7 +10,17 @@ export function cn(...inputs: ClassValue[]) {
 export default async function getCsrfToken() {
   try {
     const sanctumBaseUrl = new URL(config.backendURL).origin;
-    await axios.get(`${sanctumBaseUrl}/sanctum/csrf-cookie`);
+    const response = await axios.get(`${sanctumBaseUrl}/sanctum/csrf-cookie`, {
+      withCredentials: true, // Required to receive the XSRF-TOKEN cookie
+      headers: {
+        Accept: 'application/json', // Ensure Sanctum responds correctly
+      },
+    });
+    // Sanctum returns 204 No Content on success
+    if (response.status !== 204) {
+      throw new Error(`Unexpected response status: ${response.status}`);
+    }
+    return true; // Indicate success
   } catch (error) {
     console.error('Error fetching CSRF token:', error);
     throw error; // Re-throw to stop handleSubmit
