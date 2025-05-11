@@ -12,7 +12,7 @@ interface TransactionsProps {
 }
 
 export default function Transactions({ transactions }: TransactionsProps) {
-  const [loading, setLoading] = useState<boolean>(!transactions || transactions.length === 0);
+  const [loading, setLoading] = useState<boolean>(!transactions);
   const [error, setError] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const [modalContent, setModalContent] = useState<T | null>(null);
