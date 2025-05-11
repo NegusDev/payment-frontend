@@ -32,7 +32,7 @@ jobs:
     - name: Build Project
       run: npm run build
 
-    - name: 📂 Deploy via FTP
+    - name: Deploy via FTP
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
         server: ${{ secrets.FTP_HOST }}
