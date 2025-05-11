@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils"
+import getCsrfToken, { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -24,7 +24,7 @@ interface PaymentFormProps extends React.ComponentPropsWithoutRef<"div"> {
   onTransactionSubmit: (transaction: Transactions) => void;
 }
 
-export function PaymentForm({ 
+export function PaymentForm({
   onTransactionSubmit,
   className,
   ...props
@@ -75,6 +75,7 @@ export function PaymentForm({
     setSuccess("");
 
     try {
+      await getCsrfToken();
       const response = await initiatePayment(transaction);
       if (typeof response?.message === 'string' && response?.message?.includes("Processing")) {
         setErrors(null);
