@@ -4,6 +4,7 @@ import axios from "axios";
 // Create Axios instance
 const axiosClient = axios.create({
   baseURL: config.backendURL,
+  withCredentials: true,
 });
 
 axiosClient.interceptors.request.use((config) => {
